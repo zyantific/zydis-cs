@@ -12,7 +12,6 @@ namespace Zyantific.Zydis.Native
         ZYDIS_FEATURE_MAX_VALUE = ZYDIS_FEATURE_KNC,
     }
 
-    [StructLayout(LayoutKind.Sequential)]
     public struct Zydis
     {
         private const string ImportNameGetVersion = "ZydisGetVersion";
