@@ -13,11 +13,7 @@ namespace Zyantific.Zydis.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-#if ZYDIS_UNSAFE
-    unsafe public struct Zydis
-#else
     public struct Zydis
-#endif
     {
         private const string ImportNameGetVersion = "ZydisGetVersion";
         private const string ImportNameFeatureEnabled = "ZydisIsFeatureEnabled";
@@ -28,7 +24,6 @@ namespace Zyantific.Zydis.Native
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
             EntryPoint = ImportNameGetVersion)]
-        public static extern ZyanStatus FeatureEnabled(ZydisFeature feature);
-
+        public static extern ZyanStatus IsFeatureEnabled(ZydisFeature feature);
     }
 }
