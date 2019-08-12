@@ -38,6 +38,7 @@ namespace Test
                 Array.Copy(data, offset, buffer, 0, size);
 
                 var status = Decoder.DecodeBuffer(ref decoder, buffer, (UIntPtr)size, ref instruction);
+          //      Console.WriteLine("OpCode: {0}", instruction.);
                 if (status == Status.NO_MORE_DATA)
                 {
                     break;
@@ -55,6 +56,7 @@ namespace Test
                 offset += instruction.Length;
             }
 
+            Console.WriteLine("Version: {0}", Zydis.GetVersion());
             Console.ReadKey();
         }
     }
