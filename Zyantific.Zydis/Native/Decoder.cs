@@ -17,7 +17,7 @@ namespace Zyantific.Zydis.Native
         TZCNT,
         WBNOINVD,
         CLDEMOTE,
-        MAX_VALUE = CLDEMOTE
+        MAX_VALUE = CLDEMOTE,
     }
 
     [StructLayout(LayoutKind.Sequential)]
