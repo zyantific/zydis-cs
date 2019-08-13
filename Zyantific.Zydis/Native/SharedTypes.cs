@@ -111,4 +111,10 @@
         ELEMENT_TYPE_CC,
         ELEMENT_TYPE_MAX_VALUE = ELEMENT_TYPE_CC,
     }
+
+    public struct SharedTypeGlobals
+    {
+        public const int MaxInstructionLength = 15;
+        public const int MaxOperandCount = 10;
+    }
 }

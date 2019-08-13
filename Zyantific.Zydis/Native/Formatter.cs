@@ -4,6 +4,8 @@ using System.Text;
 using ZyanStatus = System.UInt32;
 using ZyanU64 = System.UInt64;
 using ZyanUSize = System.UIntPtr;
+using ZyanU8 = System.Byte;
+using ZyanUPointer = System.UInt64; // this may cause issues because ZyanUPtr is defined as uintptr_t 
 
 namespace Zyantific.Zydis.Native
 {
@@ -121,6 +123,10 @@ namespace Zyantific.Zydis.Native
             EntryPoint = "ZydisFormatterInit")]
         public static extern ZyanStatus Init(ref Formatter formatter, FormatterStyle style);
 
+        [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
+            EntryPoint = "ZydisFormatterSetProperty")]
+        public static extern ZyanStatus SetProperty(ref Formatter formatter, FormatterProperty property, ZyanUPointer value);
+
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true, CharSet = CharSet.Ansi,
             EntryPoint = "ZydisFormatterFormatInstruction")]
         public static extern ZyanStatus FormatInstruction(ref Formatter formatter,
@@ -128,8 +134,17 @@ namespace Zyantific.Zydis.Native
             [MarshalAs(UnmanagedType.LPStr)] StringBuilder buffer, ZyanUSize length,
             ZyanU64 runtimeAddress);
 
+        // The use of UIntPtr as a replacement of size_t may cause issues. There may also be an issue with replacing void* with IntPtrs.
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
             EntryPoint = "ZydisFormatterFormatInstructionEx")]
         public static extern ZyanStatus FormatInstructionEx(ref Formatter formatter, ref DecodedInstruction instruction, [MarshalAs(UnmanagedType.LPStr)] StringBuilder buffer, System.UIntPtr length, ZyanU64 runtimeAddress, ref System.IntPtr userData);
+
+        [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
+            EntryPoint = "ZydisFormatterFormatOperand")]
+        public static extern ZyanStatus FormatOperand(ref Formatter formatter, ref DecodedInstruction instruction, ZyanU8 index, [MarshalAs(UnmanagedType.LPStr)] StringBuilder buffer, System.UIntPtr length, ZyanU64 runtimeAddress);
+
+        [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
+            EntryPoint = "ZydisFormatterFormatOperandEx")]
+        public static extern ZyanStatus FormatOperandEx(ref Formatter formatter, ref DecodedInstruction instruction, ZyanU8 index, [MarshalAs(UnmanagedType.LPStr)] StringBuilder buffer, System.UIntPtr length, ZyanU64 runtimeAddress, System.IntPtr userData);
     }
 }

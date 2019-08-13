@@ -26,7 +26,7 @@ namespace Test
                 throw new Exception("Failed to initialize instruction-formatter.");
             }
 
-            var data = new byte[] { 0xEB, 0x00, 0x90, 0xCC };
+            var data = new byte[] { 0x89, 0xE5};
             var buffer = new byte[Constants.MAX_INSTRUCTION_LENGTH];
             var offset = 0;
 
@@ -38,7 +38,6 @@ namespace Test
                 Array.Copy(data, offset, buffer, 0, size);
 
                 var status = Decoder.DecodeBuffer(ref decoder, buffer, (UIntPtr)size, ref instruction);
-          //      Console.WriteLine("OpCode: {0}", instruction.);
                 if (status == Status.NO_MORE_DATA)
                 {
                     break;
@@ -56,7 +55,6 @@ namespace Test
                 offset += instruction.Length;
             }
 
-            Console.WriteLine("Version: {0}", Zydis.GetVersion());
             Console.ReadKey();
         }
     }
