@@ -547,34 +547,34 @@ ArraySubType = UnmanagedType.ByValArray, SizeConst = 21)]
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    struct Disp
+    public struct Disp
     {
-        ZyanBool HasDisplacement;
+        public ZyanBool HasDisplacement;
 
-        ZyanI64 value;
+        public ZyanI64 value;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Mem
     {
-        MemoryOperandType Type;
+        public MemoryOperandType Type;
 
-        Register Sement;
+        public Register Sement;
 
-        Register Base;
+        public Register Base;
 
-        Register index;
+        public Register index;
 
-        ZyanU8 scale;
+        public ZyanU8 scale;
 
-        Disp Disp;
+        public Disp Disp;
     }
 
     public struct Ptr
     {
-        ZyanU16 segment;
+        public ZyanU16 segment;
 
-        ZyanU32 offset;
+        public ZyanU32 offset;
     }
 
     [StructLayout(LayoutKind.Explicit)]

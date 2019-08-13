@@ -26,7 +26,7 @@ namespace Test
                 throw new Exception("Failed to initialize instruction-formatter.");
             }
 
-            var data = new byte[] { 0x89, 0xE5};
+            var data = new byte[] { 0xEB, 0x00, 0x90, 0xCC };
             var buffer = new byte[Constants.MAX_INSTRUCTION_LENGTH];
             var offset = 0;
 
