@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zyantific.Zydis.Generated
+﻿namespace Zyantific.Zydis.Generated
 {
     public enum ISASet
     {
@@ -166,6 +162,5 @@ namespace Zyantific.Zydis.Generated
          * @brief   Maximum value of this enum.
          */
         ISA_SET_MAX_VALUE = ISA_SET_XSAVES,
-
     }
 }

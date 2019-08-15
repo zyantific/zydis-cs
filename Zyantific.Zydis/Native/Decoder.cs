@@ -17,17 +17,17 @@ namespace Zyantific.Zydis.Native
         TZCNT,
         WBNOINVD,
         CLDEMOTE,
-        MAX_VALUE = CLDEMOTE,
+
+        MAX_VALUE = CLDEMOTE
     }
 
     [StructLayout(LayoutKind.Sequential)]
 #if ZYDIS_UNSAFE
-    unsafe public struct Decoder
+    public unsafe struct Decoder
 #else
     public struct Decoder
 #endif
     {
-
         public MachineMode MachineMode;
 
         public AddressWidth AddressWidth;

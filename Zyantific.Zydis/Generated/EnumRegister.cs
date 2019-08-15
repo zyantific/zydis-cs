@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zyantific.Zydis.Generated
+﻿namespace Zyantific.Zydis.Generated
 {
     public enum Register
     {
@@ -29,6 +25,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_R13B,
         REGISTER_R14B,
         REGISTER_R15B,
+
         // General purpose registers 16-bit
         REGISTER_AX,
         REGISTER_CX,
@@ -46,6 +43,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_R13W,
         REGISTER_R14W,
         REGISTER_R15W,
+
         // General purpose registers 32-bit
         REGISTER_EAX,
         REGISTER_ECX,
@@ -63,6 +61,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_R13D,
         REGISTER_R14D,
         REGISTER_R15D,
+
         // General purpose registers 64-bit
         REGISTER_RAX,
         REGISTER_RCX,
@@ -80,6 +79,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_R13,
         REGISTER_R14,
         REGISTER_R15,
+
         // Floating point legacy registers
         REGISTER_ST0,
         REGISTER_ST1,
@@ -92,6 +92,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_X87CONTROL,
         REGISTER_X87STATUS,
         REGISTER_X87TAG,
+
         // Floating point multimedia registers
         REGISTER_MM0,
         REGISTER_MM1,
@@ -101,6 +102,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_MM5,
         REGISTER_MM6,
         REGISTER_MM7,
+
         // Floating point vector registers 128-bit
         REGISTER_XMM0,
         REGISTER_XMM1,
@@ -134,6 +136,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_XMM29,
         REGISTER_XMM30,
         REGISTER_XMM31,
+
         // Floating point vector registers 256-bit
         REGISTER_YMM0,
         REGISTER_YMM1,
@@ -167,6 +170,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_YMM29,
         REGISTER_YMM30,
         REGISTER_YMM31,
+
         // Floating point vector registers 512-bit
         REGISTER_ZMM0,
         REGISTER_ZMM1,
@@ -200,14 +204,17 @@ namespace Zyantific.Zydis.Generated
         REGISTER_ZMM29,
         REGISTER_ZMM30,
         REGISTER_ZMM31,
+
         // Flags registers
         REGISTER_FLAGS,
         REGISTER_EFLAGS,
         REGISTER_RFLAGS,
+
         // Instruction-pointer registers
         REGISTER_IP,
         REGISTER_EIP,
         REGISTER_RIP,
+
         // Segment registers
         REGISTER_ES,
         REGISTER_CS,
@@ -215,11 +222,13 @@ namespace Zyantific.Zydis.Generated
         REGISTER_DS,
         REGISTER_FS,
         REGISTER_GS,
+
         // Table registers
         REGISTER_GDTR,
         REGISTER_LDTR,
         REGISTER_IDTR,
         REGISTER_TR,
+
         // Test registers
         REGISTER_TR0,
         REGISTER_TR1,
@@ -229,6 +238,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_TR5,
         REGISTER_TR6,
         REGISTER_TR7,
+
         // Control registers
         REGISTER_CR0,
         REGISTER_CR1,
@@ -246,6 +256,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_CR13,
         REGISTER_CR14,
         REGISTER_CR15,
+
         // Debug registers
         REGISTER_DR0,
         REGISTER_DR1,
@@ -263,6 +274,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_DR13,
         REGISTER_DR14,
         REGISTER_DR15,
+
         // Mask registers
         REGISTER_K0,
         REGISTER_K1,
@@ -272,6 +284,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_K5,
         REGISTER_K6,
         REGISTER_K7,
+
         // Bound registers
         REGISTER_BND0,
         REGISTER_BND1,
@@ -279,6 +292,7 @@ namespace Zyantific.Zydis.Generated
         REGISTER_BND3,
         REGISTER_BNDCFG,
         REGISTER_BNDSTATUS,
+
         // Uncategorized
         REGISTER_MXCSR,
         REGISTER_PKRU,
@@ -287,6 +301,6 @@ namespace Zyantific.Zydis.Generated
         /**
          * @brief   Maximum value of this enum.
          */
-        REGISTER_MAX_VALUE = REGISTER_XCR0,
+        REGISTER_MAX_VALUE = REGISTER_XCR0
     }
 }

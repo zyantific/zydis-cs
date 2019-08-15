@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zyantific.Zydis.Generated
+﻿namespace Zyantific.Zydis.Generated
 {
     public enum InstructionCategory
     {
@@ -104,5 +100,4 @@ namespace Zyantific.Zydis.Generated
         CATEGORY_XSAVEOPT,
         CATEGORY_MAX_VALUE = CATEGORY_XSAVEOPT,
     }
-
 }

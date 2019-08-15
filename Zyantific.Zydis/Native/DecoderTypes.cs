@@ -1,15 +1,14 @@
 ﻿using System.Runtime.InteropServices;
-
-using ZyanU8 = System.Byte;
-using ZyanU16 = System.UInt16;
-using ZydisElementSize = System.UInt16;
 using Zyantific.Zydis.Generated;
 using ZyanBool = System.Byte;
 using ZyanI64 = System.Int64;
+using ZyanU16 = System.UInt16;
 using ZyanU32 = System.UInt32;
 using ZyanU64 = System.UInt64;
+
+using ZyanU8 = System.Byte;
+using ZydisElementSize = System.UInt16;
 using ZydisInstructionAttributes = System.UInt64;
-using System;
 
 namespace Zyantific.Zydis.Native
 {
@@ -19,8 +18,10 @@ namespace Zyantific.Zydis.Native
         MEMOP_TYPE_MEM,
         MEMOP_TYPE_AGEN,
         MEMOP_TYPE_MIB,
+
         MEMOP_TYPE_MAX_VALUE = MEMOP_TYPE_MIB,
     }
+
     public enum MachineMode
     {
         LONG_64,
@@ -29,6 +30,7 @@ namespace Zyantific.Zydis.Native
         LEGACY_32,
         LEGACY_16,
         REAL_16,
+
         MAX_VALUE = REAL_16
     }
 
@@ -37,6 +39,7 @@ namespace Zyantific.Zydis.Native
         WIDTH_16,
         WIDTH_32,
         WIDTH_64,
+
         MAX_VALUE = WIDTH_64
     }
 
@@ -49,7 +52,8 @@ namespace Zyantific.Zydis.Native
         CPUFLAG_ACTION_SET_0,
         CPUFLAG_ACTION_SET_1,
         CPUFLAG_ACTION_UNDEFINED,
-        CPUFLAG_ACTION_MAX_VALUE = CPUFLAG_ACTION_UNDEFINED,
+
+        CPUFLAG_ACTION_MAX_VALUE = CPUFLAG_ACTION_UNDEFINED
     }
 
     public enum CPUFlag
@@ -83,7 +87,8 @@ namespace Zyantific.Zydis.Native
         BRANCH_TYPE_SHORT,
         BRANCH_TYPE_NEAR,
         BRANCH_TYPE_FAR,
-        BRANCH_TYPE_MAX_VALUE = BRANCH_TYPE_FAR,
+
+        BRANCH_TYPE_MAX_VALUE = BRANCH_TYPE_FAR
     }
 
     public enum ExceptionClass
@@ -128,7 +133,8 @@ namespace Zyantific.Zydis.Native
         EXCEPTION_CLASS_E12NP,
         EXCEPTION_CLASS_K20,
         EXCEPTION_CLASS_K21,
-        EXCEPTION_CLASS_MAX_VALUE = EXCEPTION_CLASS_K21,
+
+        EXCEPTION_CLASS_MAX_VALUE = EXCEPTION_CLASS_K21
     }
 
     public enum MaskMode
@@ -139,7 +145,8 @@ namespace Zyantific.Zydis.Native
         MASK_MODE_ZEROING,
         MASK_MODE_CONTROL,
         MASK_MODE_CONTROL_ZEROING,
-        MASK_MODE_MAX_VALUE = MASK_MODE_CONTROL_ZEROING,
+
+        MASK_MODE_MAX_VALUE = MASK_MODE_CONTROL_ZEROING
     }
 
     public enum BroadcastMode
@@ -157,7 +164,8 @@ namespace Zyantific.Zydis.Native
         BROADCAST_MODE_4_TO_8,
         BROADCAST_MODE_4_TO_16,
         BROADCAST_MODE_8_TO_16,
-        BROADCAST_MODE_MAX_VALUE = BROADCAST_MODE_8_TO_16,
+
+        BROADCAST_MODE_MAX_VALUE = BROADCAST_MODE_8_TO_16
     }
 
     public enum RoundingMode
@@ -167,7 +175,8 @@ namespace Zyantific.Zydis.Native
         ROUNDING_MODE_RD,
         ROUNDING_MODE_RU,
         ROUNDING_MODE_RZ,
-        ROUNDING_MODE_MAX_VALUE = ROUNDING_MODE_RZ,
+
+        ROUNDING_MODE_MAX_VALUE = ROUNDING_MODE_RZ
     }
 
     public enum SwizzleMode
@@ -181,7 +190,8 @@ namespace Zyantific.Zydis.Native
         SWIZZLE_MODE_BBBB,
         SWIZZLE_MODE_CCCC,
         SWIZZLE_MODE_DDDD,
-        SWIZZLE_MODE_MAX_VALUE = SWIZZLE_MODE_DDDD,
+
+        SWIZZLE_MODE_MAX_VALUE = SWIZZLE_MODE_DDDD
     }
 
     public enum ConversionMode
@@ -192,7 +202,8 @@ namespace Zyantific.Zydis.Native
         CONVERSION_MODE_UINT8,
         CONVERSION_MODE_SINT16,
         CONVERSION_MODE_UINT16,
-        CONVERSION_MODE_MAX_VALUE = CONVERSION_MODE_UINT16,
+
+        CONVERSION_MODE_MAX_VALUE = CONVERSION_MODE_UINT16
     }
 
     public enum PrefixType
@@ -200,300 +211,393 @@ namespace Zyantific.Zydis.Native
         PREFIX_TYPE_IGNORED,
         PREFIX_TYPE_EFFECTIVE,
         PREFIX_TYPE_MANDATORY,
-        PREFIX_TYPE_MAX_VALUE = PREFIX_TYPE_MANDATORY,
+
+        PREFIX_TYPE_MAX_VALUE = PREFIX_TYPE_MANDATORY
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionAccessedFlags
+    public struct DecodedOperand
     {
-        public CPUFlagAction Action;
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Reg
+        {
+            public Register value;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Disp
+        {
+            public ZyanBool HasDisplacement;
+
+            public ZyanI64 value;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Mem
+        {
+            public MemoryOperandType Type;
+
+            public Register Sement;
+
+            public Register Base;
+
+            public Register index;
+
+            public ZyanU8 scale;
+
+            public Disp Disp;
+        }
+
+        public struct Ptr
+        {
+            public ZyanU16 segment;
+
+            public ZyanU32 offset;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct Value
+        {
+            [FieldOffset(0)]
+            public ZyanU64 U;
+
+            [FieldOffset(1)]
+            public ZyanI64 S;
+        }
+
+        public struct Imm
+        {
+            public ZyanBool IsSigned;
+
+            public ZyanBool IsRelative;
+
+            public Value value;
+        }
+
+        public ZyanU8 Id;
+
+        public OperandType Type;
+
+        public OperandVisibility Visibility;
+
+        public OperandAction Action;
+
+        public OperandEncoding Encoding;
+
+        public ZyanU16 Size;
+
+        public ElementType ElementType;
+
+        public ZydisElementSize ElementSize;
+
+        public ZyanU16 ElementCount;
+
+        public Reg reg;
+
+        public Mem mem;
+
+        public Ptr ptr;
+
+        public Imm imm;
     }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionAvxMask
-    {
-        public MaskMode MaskMode;
-
-        public Register Reg;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionAvxBroadcast
-    {
-        public ZyanBool IsStatic;
-
-        public BroadcastMode BroadcastMode;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionAvxRounding
-    {
-        public RoundingMode RoundingMode;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionAvxSwizzle
-    {
-        public SwizzleMode SwizzleMode;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionAvxConversion
-    {
-        public ConversionMode ConversionMode;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionAvx
-    {
-        public ZyanU16 VectorLength;
-
-        public DecodedInstructionAvxMask AvxMask;
-
-        public DecodedInstructionAvxBroadcast AvxBroadcast;
-
-        public DecodedInstructionAvxRounding AvxRounding;
-
-        public DecodedInstructionAvxSwizzle AvxSwizzle;
-
-        public DecodedInstructionAvxConversion AvxConversion;
-
-        public ZyanBool HasSae;
-
-        public ZyanBool HasEvictionHint;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionMeta
-    {
-        public InstructionCategory InstructionCategory;
-
-        public ISASet IsASet;
-
-        public BranchType BranchType;
-
-        public ExceptionClass ExceptionClass;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawPrefixes
-    {
-        public PrefixType PrefixType;
-
-        public ZyanU8 Value;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawRex
-    {
-        public ZyanU8 W;
-
-        public ZyanU8 R;
-
-        public ZyanU8 X;
-
-        public ZyanU8 B;
-
-        public ZyanU8 offset;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawXop
-    {
-        public ZyanU8 R;
-
-        public ZyanU8 X;
-
-        public ZyanU8 B;
-
-        public ZyanU8 m_mmmm;
-
-        public ZyanU8 W;
-
-        public ZyanU8 vvvv;
-
-        public ZyanU8 L;
-
-        public ZyanU8 pp;
-
-        public ZyanU8 offset;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawVex
-    {
-        public ZyanU8 R;
-
-        public ZyanU8 X;
-
-        public ZyanU8 B;
-
-        public ZyanU8 m_mmmm;
-
-        public ZyanU8 W;
-
-        public ZyanU8 vvvv;
-
-        public ZyanU8 L;
-
-        public ZyanU8 pp;
-
-        public ZyanU8 offset;
-
-        public ZyanU8 size;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawEvex
-    {
-        public ZyanU8 R;
-
-        public ZyanU8 X;
-
-        public ZyanU8 B;
-
-        public ZyanU8 R2;
-
-        public ZyanU8 Mn;
-
-        public ZyanU8 W;
-
-        public ZyanU8 vvvv;
-
-        public ZyanU8 pp;
-
-        public ZyanU8 z;
-
-        public ZyanU8 L2;
-
-        public ZyanU8 L;
-
-        public ZyanU8 b;
-
-        public ZyanU8 V2;
-
-        public ZyanU8 aaa;
-
-        public ZyanU8 offset;
-
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawMvex
-    {
-        public ZyanU8 R;
-
-        public ZyanU8 X;
-
-        public ZyanU8 B;
-
-        public ZyanU8 R2;
-
-        public ZyanU8 mmmm;
-
-        public ZyanU8 W;
-
-        public ZyanU8 vvvv;
-
-        public ZyanU8 pp;
-
-        public ZyanU8 E;
-
-        public ZyanU8 SSS;
-
-        public ZyanU8 V2;
-
-        public ZyanU8 kkk;
-
-        public ZyanU8 offset;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionModRm
-    {
-        public ZyanU8 mod;
-        public ZyanU8 reg;
-        public ZyanU8 rm;
-        public ZyanU8 offset;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawSib
-    {
-        public ZyanU8 scale;
-        public ZyanU8 index;
-        public ZyanU8 Base;
-        public ZyanU8 offset;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawDisp
-    {
-        public ZyanI64 value;
-        public ZyanU8 size;
-        public ZyanU8 offset;
-    }
-
-    [StructLayout(LayoutKind.Explicit)]
-    public struct DecodedInstructionRawImmValue
-    {
-        [FieldOffset(0)]
-        public ZyanU64 U;
-
-        [FieldOffset(1)]
-        public ZyanI64 S;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRawImm
-    {
-        public ZyanBool IsSigned;
-
-        public ZyanBool IsRelative;
-
-        public DecodedInstructionRawImmValue ImmValue;
-
-        public ZyanU8 size;
-
-        public ZyanU8 offset;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedInstructionRaw
-    {
-        public ZyanU8 PrefixCount;
-
-        //   DecodedInstructionRawPrefixes[] RawPrefixes; // this HAS to be an array because it will mess up the struct otherwise.
-        [MarshalAs(UnmanagedType.ByValArray,
-        ArraySubType = UnmanagedType.ByValArray, SizeConst = SharedTypeGlobals.MaxInstructionLength)]
-        public DecodedInstructionRawPrefixes[] RawPrefixes;
-
-        public DecodedInstructionRawRex RawRex;
-
-        public DecodedInstructionRawXop RawXop;
-
-        public DecodedInstructionRawVex RawVex;
-
-        public DecodedInstructionRawEvex RawEvex;
-
-        public DecodedInstructionRawMvex RawMvex;
-
-        public DecodedInstructionModRm ModRm;
-
-        public DecodedInstructionRawSib RawSib;
-
-        public DecodedInstructionRawDisp RawDisp;
-
-        //   DecodedInstructionRawImm RawImm; // this should be an array of 2
-        [MarshalAs(UnmanagedType.ByValArray,
-        ArraySubType = UnmanagedType.ByValArray, SizeConst = 2)]
-        public DecodedInstructionRawImm[] RawImm;
-    }
-
 
     [StructLayout(LayoutKind.Sequential)]
     public struct DecodedInstruction
     {
+        [StructLayout(LayoutKind.Sequential)]
+        public struct AccessedFlags
+        {
+            public CPUFlagAction Action;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Avx
+        {
+            [StructLayout(LayoutKind.Sequential)]
+            public struct Mask_
+            {
+                public MaskMode MaskMode;
+
+                public Register Reg;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct Broadcast_
+            {
+                public ZyanBool IsStatic;
+
+                public BroadcastMode BroadcastMode;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct Rounding_
+            {
+                public RoundingMode RoundingMode;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct Swizzle_
+            {
+                public SwizzleMode SwizzleMode;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct Conversion_
+            {
+                public ConversionMode ConversionMode;
+            }
+
+            public ZyanU16 VectorLength;
+
+            public Mask_ Mask;
+
+            public Broadcast_ Broadcast;
+
+            public Rounding_ Rounding;
+
+            public Swizzle_ Swizzle;
+
+            public Conversion_ Conversion;
+
+            public ZyanBool HasSae;
+
+            public ZyanBool HasEvictionHint;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Meta
+        {
+            public InstructionCategory InstructionCategory;
+
+            public ISASet IsASet;
+
+            public BranchType BranchType;
+
+            public ExceptionClass ExceptionClass;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Raw
+        {
+            [StructLayout(LayoutKind.Sequential)]
+            public struct Prefixes
+            {
+                public PrefixType type;
+
+                public ZyanU8 value;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct REX
+            {
+                public ZyanU8 W;
+
+                public ZyanU8 R;
+
+                public ZyanU8 X;
+
+                public ZyanU8 B;
+
+                public ZyanU8 offset;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct XOP
+            {
+                public ZyanU8 R;
+
+                public ZyanU8 X;
+
+                public ZyanU8 B;
+
+                public ZyanU8 m_mmmm;
+
+                public ZyanU8 W;
+
+                public ZyanU8 vvvv;
+
+                public ZyanU8 L;
+
+                public ZyanU8 pp;
+
+                public ZyanU8 offset;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct VEX
+            {
+                public ZyanU8 R;
+
+                public ZyanU8 X;
+
+                public ZyanU8 B;
+
+                public ZyanU8 m_mmmm;
+
+                public ZyanU8 W;
+
+                public ZyanU8 vvvv;
+
+                public ZyanU8 L;
+
+                public ZyanU8 pp;
+
+                public ZyanU8 offset;
+
+                public ZyanU8 size;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct EVEX
+            {
+                public ZyanU8 R;
+
+                public ZyanU8 X;
+
+                public ZyanU8 B;
+
+                public ZyanU8 R2;
+
+                public ZyanU8 Mn;
+
+                public ZyanU8 W;
+
+                public ZyanU8 vvvv;
+
+                public ZyanU8 pp;
+
+                public ZyanU8 z;
+
+                public ZyanU8 L2;
+
+                public ZyanU8 L;
+
+                public ZyanU8 b;
+
+                public ZyanU8 V2;
+
+                public ZyanU8 aaa;
+
+                public ZyanU8 offset;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct MVEX
+            {
+                public ZyanU8 R;
+
+                public ZyanU8 X;
+
+                public ZyanU8 B;
+
+                public ZyanU8 R2;
+
+                public ZyanU8 mmmm;
+
+                public ZyanU8 W;
+
+                public ZyanU8 vvvv;
+
+                public ZyanU8 pp;
+
+                public ZyanU8 E;
+
+                public ZyanU8 SSS;
+
+                public ZyanU8 V2;
+
+                public ZyanU8 kkk;
+
+                public ZyanU8 offset;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct ModRM
+            {
+                public ZyanU8 mod;
+
+                public ZyanU8 reg;
+
+                public ZyanU8 rm;
+
+                public ZyanU8 offset;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct SIB
+            {
+                public ZyanU8 scale;
+
+                public ZyanU8 index;
+
+                public ZyanU8 @base;
+
+                public ZyanU8 offset;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct DISP
+            {
+                public ZyanI64 value;
+
+                public ZyanU8 size;
+
+                public ZyanU8 offset;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            public struct IMM
+            {
+                [StructLayout(LayoutKind.Explicit)]
+                public struct Value
+                {
+                    [FieldOffset(0)]
+                    public ZyanU64 u;
+
+                    [FieldOffset(1)]
+                    public ZyanI64 s;
+                }
+
+                public ZyanBool is_signed;
+
+                public ZyanBool is_relative;
+
+                public Value value;
+
+                public ZyanU8 size;
+
+                public ZyanU8 offset;
+            }
+
+            public ZyanU8 prefix_count;
+
+            //   DecodedInstructionRawPrefixes[] RawPrefixes; // this HAS to be an array because it will mess up the struct otherwise.
+            [MarshalAs(UnmanagedType.ByValArray,
+            ArraySubType = UnmanagedType.ByValArray, SizeConst = Constants.MAX_INSTRUCTION_LENGTH)]
+            public Prefixes[] prefixes;
+
+            public REX rex;
+
+            public XOP xop;
+
+            public VEX vex;
+
+            public EVEX evex;
+
+            public MVEX mvex;
+
+            public ModRM modrm;
+
+            public SIB sib;
+
+            public DISP disp;
+
+            //   DecodedInstructionRawImm RawImm; // this should be an array of 2
+            [MarshalAs(UnmanagedType.ByValArray,
+            ArraySubType = UnmanagedType.ByValArray, SizeConst = 2)]
+            public IMM[] imm;
+        }
+
         public MachineMode MachineMode;
 
         public Mnemonic Mnemonic;
@@ -514,115 +618,30 @@ namespace Zyantific.Zydis.Native
 
         public ZyanU8 OperandCount;
 
-        [MarshalAs(UnmanagedType.ByValArray,
-      ArraySubType = UnmanagedType.ByValArray, SizeConst = SharedTypeGlobals.MaxOperandCount)]
+        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValArray,
+            SizeConst = Constants.MAX_OPERAND_COUNT)]
         public DecodedOperand[] Operands;
 
-     //   public DecodedOperand operand; // This has to be a fixed length array.
+        //   public DecodedOperand operand; // This has to be a fixed length array.
 
         public ZydisInstructionAttributes Attributes;
 
         [MarshalAs(UnmanagedType.ByValArray,
 ArraySubType = UnmanagedType.ByValArray, SizeConst = 21)]
-        public DecodedInstructionAccessedFlags[] AccessedFlags;
+        public AccessedFlags[] accessed_flags;
+
         // public DecodedInstructionAccessedFlags AccessedFlags; // might need to be an array too
 
-        public DecodedInstructionAvx Avx;
+        public Avx avx;
 
-        public DecodedInstructionMeta Meta;
+        public Meta meta;
 
-        public DecodedInstructionRaw Raw;
+        public Raw raw;
 
         /*
         // Only for testing ..
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024 * 10)]
         public byte[] Data;
         */
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Reg
-    {
-        public Register Value;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Disp
-    {
-        public ZyanBool HasDisplacement;
-
-        public ZyanI64 value;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Mem
-    {
-        public MemoryOperandType Type;
-
-        public Register Sement;
-
-        public Register Base;
-
-        public Register index;
-
-        public ZyanU8 scale;
-
-        public Disp Disp;
-    }
-
-    public struct Ptr
-    {
-        public ZyanU16 segment;
-
-        public ZyanU32 offset;
-    }
-
-    [StructLayout(LayoutKind.Explicit)]
-    public struct Union
-    {
-        [FieldOffset(0)]
-        public ZyanU64 U;
-
-        [FieldOffset(1)]
-        public ZyanI64 S;
-    }
-
-    public struct Imm
-    {
-        public ZyanBool IsSigned;
-
-        public ZyanBool IsRelative;
-
-        public Union Union;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DecodedOperand
-    {
-        public ZyanU8 Id;
-
-        public OperandType Type;
-
-        public OperandVisibility Visibility;
-
-        public OperandAction Action;
-
-        public OperandEncoding Encoding;
-
-        public ZyanU16 Size;
-
-        public ElementType ElementType;
-
-        public ZydisElementSize ElementSize;
-
-        public ZyanU16 ElementCount;
-
-        public Reg Reg;
-
-        public Mem Mem;
-
-        public Ptr Ptr;
-
-        public Imm Imm;
     }
 }
