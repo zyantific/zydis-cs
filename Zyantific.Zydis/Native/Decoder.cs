@@ -27,9 +27,6 @@ namespace Zyantific.Zydis.Native
     public struct Decoder
 #endif
     {
-        private const string ImportNameInit = "ZydisDecoderInit";
-        private const string ImportNameEnableMode = "ZydisDecoderEnableMode";
-        private const string ImportNameDecodeBuffer = "ZydisDecoderDecodeBuffer";
 
         public MachineMode MachineMode;
 
@@ -44,16 +41,16 @@ namespace Zyantific.Zydis.Native
 #endif
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameInit)]
+            EntryPoint = "ZydisDecoderInit")]
         public static extern ZyanStatus Init(ref Decoder decoder, MachineMode machineMode, AddressWidth addressWidth);
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameEnableMode)]
+            EntryPoint = "ZydisDecoderEnableMode")]
         public static extern ZyanStatus EnableMode(ref Decoder decoder, DecoderMode decoderMode,
             [MarshalAs(UnmanagedType.I1)] bool enabled);
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameDecodeBuffer)]
+            EntryPoint = "ZydisDecoderDecodeBuffer")]
         public static extern ZyanStatus DecodeBuffer(ref Decoder decoder,
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1)] ZyanU8[] buffer,
             ZyanUSize length, ref DecodedInstruction instruction);

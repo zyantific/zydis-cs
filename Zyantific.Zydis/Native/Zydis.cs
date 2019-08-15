@@ -7,6 +7,8 @@ namespace Zyantific.Zydis.Native
 {
     public enum ZydisFeature
     {
+        ZYDIS_FEATURE_DECODER,
+        ZYDIS_FEATURE_FORMATTER,
         ZYDIS_FEATURE_AVX512,
         ZYDIS_FEATURE_KNC,
         ZYDIS_FEATURE_MAX_VALUE = ZYDIS_FEATURE_KNC,
@@ -14,15 +16,12 @@ namespace Zyantific.Zydis.Native
 
     public struct Zydis
     {
-        private const string ImportNameGetVersion = "ZydisGetVersion";
-        private const string ImportNameFeatureEnabled = "ZydisIsFeatureEnabled";
-
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameGetVersion)]
+            EntryPoint = "ZydisGetVersion")]
         public static extern ZyanU64 GetVersion();
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameGetVersion)]
+            EntryPoint = "ZydisIsFeatureEnabled")]
         public static extern ZyanStatus IsFeatureEnabled(ZydisFeature feature);
     }
 }
