@@ -14,12 +14,12 @@ namespace Zyantific.Zydis.Native
 {
     public enum MemoryOperandType
     {
-        MEMOP_TYPE_INVALID,
-        MEMOP_TYPE_MEM,
-        MEMOP_TYPE_AGEN,
-        MEMOP_TYPE_MIB,
+        INVALID,
+        MEM,
+        AGEN,
+        MIB,
 
-        MEMOP_TYPE_MAX_VALUE = MEMOP_TYPE_MIB,
+        MAX_VALUE = MIB,
     }
 
     public enum MachineMode
@@ -45,174 +45,176 @@ namespace Zyantific.Zydis.Native
 
     public enum CPUFlagAction
     {
-        CPUFLAG_ACTION_NONE,
-        CPUFLAG_ACTION_TESTED,
-        CPUFLAG_ACTION_TESTED_MODIFIED,
-        CPUFLAG_ACTION_MODIFIED,
-        CPUFLAG_ACTION_SET_0,
-        CPUFLAG_ACTION_SET_1,
-        CPUFLAG_ACTION_UNDEFINED,
+        NONE,
+        TESTED,
+        TESTED_MODIFIED,
+        MODIFIED,
+        SET_0,
+        SET_1,
+        UNDEFINED,
 
-        CPUFLAG_ACTION_MAX_VALUE = CPUFLAG_ACTION_UNDEFINED
+        MAX_VALUE = UNDEFINED
     }
 
     public enum CPUFlag
     {
-        CPUFLAG_CF,
-        CPUFLAG_PF,
-        CPUFLAG_AF,
-        CPUFLAG_ZF,
-        CPUFLAG_SF,
-        CPUFLAG_TF,
-        CPUFLAG_IF,
-        CPUFLAG_DF,
-        CPUFLAG_OF,
-        CPUFLAG_IOPL,
-        CPUFLAG_NT,
-        CPUFLAG_RF,
-        CPUFLAG_VM,
-        CPUFLAG_AC,
-        CPUFLAG_VIF,
-        CPUFLAG_VIP,
-        CPUFLAG_ID,
-        CPUFLAG_C0,
-        CPUFLAG_C1,
-        CPUFLAG_C2,
-        CPUFLAG_C3,
+        CF,
+        PF,
+        AF,
+        ZF,
+        SF,
+        TF,
+        IF,
+        DF,
+        OF,
+        IOPL,
+        NT,
+        RF,
+        VM,
+        AC,
+        VIF,
+        VIP,
+        ID,
+        C0,
+        C1,
+        C2,
+        C3,
+
+        MAX_VALUE = C3
     }
 
     public enum BranchType
     {
-        BRANCH_TYPE_NONE,
-        BRANCH_TYPE_SHORT,
-        BRANCH_TYPE_NEAR,
-        BRANCH_TYPE_FAR,
+        NONE,
+        SHORT,
+        NEAR,
+        FAR,
 
-        BRANCH_TYPE_MAX_VALUE = BRANCH_TYPE_FAR
+        MAX_VALUE = FAR
     }
 
     public enum ExceptionClass
     {
-        EXCEPTION_CLASS_NONE,
-        EXCEPTION_CLASS_SSE1,
-        EXCEPTION_CLASS_SSE2,
-        EXCEPTION_CLASS_SSE3,
-        EXCEPTION_CLASS_SSE4,
-        EXCEPTION_CLASS_SSE5,
-        EXCEPTION_CLASS_SSE7,
-        EXCEPTION_CLASS_AVX1,
-        EXCEPTION_CLASS_AVX2,
-        EXCEPTION_CLASS_AVX3,
-        EXCEPTION_CLASS_AVX4,
-        EXCEPTION_CLASS_AVX5,
-        EXCEPTION_CLASS_AVX6,
-        EXCEPTION_CLASS_AVX7,
-        EXCEPTION_CLASS_AVX8,
-        EXCEPTION_CLASS_AVX11,
-        EXCEPTION_CLASS_AVX12,
-        EXCEPTION_CLASS_E1,
-        EXCEPTION_CLASS_E1NF,
-        EXCEPTION_CLASS_E2,
-        EXCEPTION_CLASS_E2NF,
-        EXCEPTION_CLASS_E3,
-        EXCEPTION_CLASS_E3NF,
-        EXCEPTION_CLASS_E4,
-        EXCEPTION_CLASS_E4NF,
-        EXCEPTION_CLASS_E5,
-        EXCEPTION_CLASS_E5NF,
-        EXCEPTION_CLASS_E6,
-        EXCEPTION_CLASS_E6NF,
-        EXCEPTION_CLASS_E7NM,
-        EXCEPTION_CLASS_E7NM128,
-        EXCEPTION_CLASS_E9NF,
-        EXCEPTION_CLASS_E10,
-        EXCEPTION_CLASS_E10NF,
-        EXCEPTION_CLASS_E11,
-        EXCEPTION_CLASS_E11NF,
-        EXCEPTION_CLASS_E12,
-        EXCEPTION_CLASS_E12NP,
-        EXCEPTION_CLASS_K20,
-        EXCEPTION_CLASS_K21,
+        NONE,
+        SSE1,
+        SSE2,
+        SSE3,
+        SSE4,
+        SSE5,
+        SSE7,
+        AVX1,
+        AVX2,
+        AVX3,
+        AVX4,
+        AVX5,
+        AVX6,
+        AVX7,
+        AVX8,
+        AVX11,
+        AVX12,
+        E1,
+        E1NF,
+        E2,
+        E2NF,
+        E3,
+        E3NF,
+        E4,
+        E4NF,
+        E5,
+        E5NF,
+        E6,
+        E6NF,
+        E7NM,
+        E7NM128,
+        E9NF,
+        E10,
+        E10NF,
+        E11,
+        E11NF,
+        E12,
+        E12NP,
+        K20,
+        K21,
 
-        EXCEPTION_CLASS_MAX_VALUE = EXCEPTION_CLASS_K21
+        MAX_VALUE = K21
     }
 
     public enum MaskMode
     {
-        MASK_MODE_INVALID,
-        MASK_MODE_DISABLED,
-        MASK_MODE_MERGING,
-        MASK_MODE_ZEROING,
-        MASK_MODE_CONTROL,
-        MASK_MODE_CONTROL_ZEROING,
+        INVALID,
+        DISABLED,
+        MERGING,
+        ZEROING,
+        CONTROL,
+        CONTROL_ZEROING,
 
-        MASK_MODE_MAX_VALUE = MASK_MODE_CONTROL_ZEROING
+        MAX_VALUE = CONTROL_ZEROING
     }
 
     public enum BroadcastMode
     {
-        BROADCAST_MODE_INVALID,
-        BROADCAST_MODE_1_TO_2,
-        BROADCAST_MODE_1_TO_4,
-        BROADCAST_MODE_1_TO_8,
-        BROADCAST_MODE_1_TO_16,
-        BROADCAST_MODE_1_TO_32,
-        BROADCAST_MODE_1_TO_64,
-        BROADCAST_MODE_2_TO_4,
-        BROADCAST_MODE_2_TO_8,
-        BROADCAST_MODE_2_TO_16,
-        BROADCAST_MODE_4_TO_8,
-        BROADCAST_MODE_4_TO_16,
-        BROADCAST_MODE_8_TO_16,
+        MODE_INVALID,
+        MODE_1_TO_2,
+        MODE_1_TO_4,
+        MODE_1_TO_8,
+        MODE_1_TO_16,
+        MODE_1_TO_32,
+        MODE_1_TO_64,
+        MODE_2_TO_4,
+        MODE_2_TO_8,
+        MODE_2_TO_16,
+        MODE_4_TO_8,
+        MODE_4_TO_16,
+        MODE_8_TO_16,
 
-        BROADCAST_MODE_MAX_VALUE = BROADCAST_MODE_8_TO_16
+        MAX_VALUE = MODE_8_TO_16
     }
 
     public enum RoundingMode
     {
-        ROUNDING_MODE_INVALID,
-        ROUNDING_MODE_RN,
-        ROUNDING_MODE_RD,
-        ROUNDING_MODE_RU,
-        ROUNDING_MODE_RZ,
+        INVALID,
+        RN,
+        RD,
+        RU,
+        RZ,
 
-        ROUNDING_MODE_MAX_VALUE = ROUNDING_MODE_RZ
+        MAX_VALUE = RZ
     }
 
     public enum SwizzleMode
     {
-        SWIZZLE_MODE_INVALID,
-        SWIZZLE_MODE_DCBA,
-        SWIZZLE_MODE_CDAB,
-        SWIZZLE_MODE_BADC,
-        SWIZZLE_MODE_DACB,
-        SWIZZLE_MODE_AAAA,
-        SWIZZLE_MODE_BBBB,
-        SWIZZLE_MODE_CCCC,
-        SWIZZLE_MODE_DDDD,
+        INVALID,
+        DCBA,
+        CDAB,
+        BADC,
+        DACB,
+        AAAA,
+        BBBB,
+        CCCC,
+        DDDD,
 
-        SWIZZLE_MODE_MAX_VALUE = SWIZZLE_MODE_DDDD
+        MAX_VALUE = DDDD
     }
 
     public enum ConversionMode
     {
-        CONVERSION_MODE_INVALID,
-        CONVERSION_MODE_FLOAT16,
-        CONVERSION_MODE_SINT8,
-        CONVERSION_MODE_UINT8,
-        CONVERSION_MODE_SINT16,
-        CONVERSION_MODE_UINT16,
+        INVALID,
+        FLOAT16,
+        SINT8,
+        UINT8,
+        SINT16,
+        UINT16,
 
-        CONVERSION_MODE_MAX_VALUE = CONVERSION_MODE_UINT16
+        MAX_VALUE = UINT16
     }
 
     public enum PrefixType
     {
-        PREFIX_TYPE_IGNORED,
-        PREFIX_TYPE_EFFECTIVE,
-        PREFIX_TYPE_MANDATORY,
+        IGNORED,
+        EFFECTIVE,
+        MANDATORY,
 
-        PREFIX_TYPE_MAX_VALUE = PREFIX_TYPE_MANDATORY
+        MAX_VALUE = MANDATORY
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -227,7 +229,8 @@ namespace Zyantific.Zydis.Native
         [StructLayout(LayoutKind.Sequential)]
         public struct Disp
         {
-            public ZyanBool HasDisplacement;
+            [MarshalAs(UnmanagedType.I1)]
+            public bool HasDisplacement;
 
             public ZyanI64 value;
         }
@@ -261,15 +264,17 @@ namespace Zyantific.Zydis.Native
             [FieldOffset(0)]
             public ZyanU64 U;
 
-            [FieldOffset(1)]
+            [FieldOffset(0)]
             public ZyanI64 S;
         }
 
         public struct Imm
         {
-            public ZyanBool IsSigned;
+            [MarshalAs(UnmanagedType.I1)]
+            public bool IsSigned;
 
-            public ZyanBool IsRelative;
+            [MarshalAs(UnmanagedType.I1)]
+            public bool IsRelative;
 
             public Value value;
         }
@@ -280,7 +285,7 @@ namespace Zyantific.Zydis.Native
 
         public OperandVisibility Visibility;
 
-        public OperandAction Action;
+        public OperandActions Actions;
 
         public OperandEncoding Encoding;
 
@@ -359,21 +364,25 @@ namespace Zyantific.Zydis.Native
 
             public Conversion_ Conversion;
 
-            public ZyanBool HasSae;
+            [MarshalAs(UnmanagedType.I1)]
+            public bool HasSae;
 
-            public ZyanBool HasEvictionHint;
+            [MarshalAs(UnmanagedType.I1)]
+            public bool HasEvictionHint;
         }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct Meta
         {
-            public InstructionCategory InstructionCategory;
+            public InstructionCategory category;
 
-            public ISASet IsASet;
+            public ISASet isa_set;
 
-            public BranchType BranchType;
+            public ISAExt isa_ext;
 
-            public ExceptionClass ExceptionClass;
+            public BranchType branch_type;
+
+            public ExceptionClass exception_class;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -554,13 +563,15 @@ namespace Zyantific.Zydis.Native
                     [FieldOffset(0)]
                     public ZyanU64 u;
 
-                    [FieldOffset(1)]
+                    [FieldOffset(0)]
                     public ZyanI64 s;
                 }
 
-                public ZyanBool is_signed;
+                [MarshalAs(UnmanagedType.I1)]
+                public bool is_signed;
 
-                public ZyanBool is_relative;
+                [MarshalAs(UnmanagedType.I1)]
+                public bool is_relative;
 
                 public Value value;
 
@@ -571,9 +582,7 @@ namespace Zyantific.Zydis.Native
 
             public ZyanU8 prefix_count;
 
-            //   DecodedInstructionRawPrefixes[] RawPrefixes; // this HAS to be an array because it will mess up the struct otherwise.
-            [MarshalAs(UnmanagedType.ByValArray,
-            ArraySubType = UnmanagedType.ByValArray, SizeConst = Constants.MAX_INSTRUCTION_LENGTH)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.MAX_INSTRUCTION_LENGTH)]
             public Prefixes[] prefixes;
 
             public REX rex;
@@ -592,9 +601,7 @@ namespace Zyantific.Zydis.Native
 
             public DISP disp;
 
-            //   DecodedInstructionRawImm RawImm; // this should be an array of 2
-            [MarshalAs(UnmanagedType.ByValArray,
-            ArraySubType = UnmanagedType.ByValArray, SizeConst = 2)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
             public IMM[] imm;
         }
 
@@ -618,30 +625,18 @@ namespace Zyantific.Zydis.Native
 
         public ZyanU8 OperandCount;
 
-        [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValArray,
-            SizeConst = Constants.MAX_OPERAND_COUNT)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.MAX_OPERAND_COUNT)]
         public DecodedOperand[] Operands;
-
-        //   public DecodedOperand operand; // This has to be a fixed length array.
 
         public ZydisInstructionAttributes Attributes;
 
-        [MarshalAs(UnmanagedType.ByValArray,
-ArraySubType = UnmanagedType.ByValArray, SizeConst = 21)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)CPUFlag.MAX_VALUE + 1)]
         public AccessedFlags[] accessed_flags;
-
-        // public DecodedInstructionAccessedFlags AccessedFlags; // might need to be an array too
 
         public Avx avx;
 
         public Meta meta;
 
         public Raw raw;
-
-        /*
-        // Only for testing ..
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024 * 10)]
-        public byte[] Data;
-        */
     }
 }

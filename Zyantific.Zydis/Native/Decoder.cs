@@ -33,10 +33,10 @@ namespace Zyantific.Zydis.Native
         public AddressWidth AddressWidth;
 
 #if ZYDIS_UNSAFE
-        public fixed byte DecoderMode[(int)Native.DecoderMode.MAX_VALUE];
+        public fixed byte DecoderMode[(int)Native.DecoderMode.MAX_VALUE + 1];
 #else
         [MarshalAs(UnmanagedType.ByValArray,
-            ArraySubType = UnmanagedType.I1, SizeConst = (int)Native.DecoderMode.MAX_VALUE)]
+            ArraySubType = UnmanagedType.I1, SizeConst = (int)Native.DecoderMode.MAX_VALUE + 1)]
         public bool[] DecoderMode;
 #endif
 
