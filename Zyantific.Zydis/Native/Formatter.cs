@@ -19,93 +19,97 @@ namespace Zyantific.Zydis.Native
 
     public enum FormatterProperty
     {
-        PROP_FORCE_SIZE,
-        PROP_FORCE_SEGMENT,
-        PROP_FORCE_RELATIVE_BRANCHES,
-        PROP_FORCE_RELATIVE_RIPREL,
-        PROP_PRINT_BRANCH_SIZE,
-        PROP_DETAILED_PREFIXES,
-        PROP_ADDR_BASE,
-        PROP_ADDR_SIGNEDNESS,
-        PROP_ADDR_PADDING_ABSOLUTE,
-        PROP_ADDR_PADDING_RELATIVE,
-        PROP_DISP_BASE,
-        PROP_DISP_SIGNEDNESS,
-        PROP_DISP_PADDING,
-        PROP_IMM_BASE,
-        PROP_IMM_SIGNEDNESS,
-        PROP_IMM_PADDING,
-        PROP_UPPERCASE_PREFIXES,
-        PROP_UPPERCASE_MNEMONIC,
-        PROP_UPPERCASE_REGISTERS,
-        PROP_UPPERCASE_TYPECASTS,
-        PROP_UPPERCASE_DECORATORS,
-        PROP_DEC_PREFIX,
-        PROP_DEC_SUFFIX,
-        PROP_HEX_UPPERCASE,
-        PROP_HEX_PREFIX,
-        PROP_HEX_SUFFIX,
-        PROP_MAX_VALUE,
-        PROP_REQUIRED_BITS,
+        FORCE_SIZE,
+        FORCE_SEGMENT,
+        FORCE_RELATIVE_BRANCHES,
+        FORCE_RELATIVE_RIPREL,
+        PRINT_BRANCH_SIZE,
+        DETAILED_PREFIXES,
+        ADDR_BASE,
+        ADDR_SIGNEDNESS,
+        ADDR_PADDING_ABSOLUTE,
+        ADDR_PADDING_RELATIVE,
+        DISP_BASE,
+        DISP_SIGNEDNESS,
+        DISP_PADDING,
+        IMM_BASE,
+        IMM_SIGNEDNESS,
+        IMM_PADDING,
+        UPPERCASE_PREFIXES,
+        UPPERCASE_MNEMONIC,
+        UPPERCASE_REGISTERS,
+        UPPERCASE_TYPECASTS,
+        UPPERCASE_DECORATORS,
+        DEC_PREFIX,
+        DEC_SUFFIX,
+        HEX_UPPERCASE,
+        HEX_PREFIX,
+        HEX_SUFFIX,
+
+        MAX_VALUE = HEX_SUFFIX
     }
 
     public enum NumericBase
     {
-        NUMERIC_BASE_DEC,
-        NUMERIC_BASE_HEX,
-        NUMERIC_BASE_MAX_VALUE = NUMERIC_BASE_HEX,
-        NUMERIC_BASE_REQUIRED_BITS // value needs to be set
+        DEC,
+        HEX,
+
+        MAX_VALUE = HEX
     }
 
     public enum Signedness
     {
-        SIGNEDNESS_AUTO,
-        SIGNEDNESS_SIGNED,
-        SIGNEDNESS_UNSIGNED,
-        SIGNEDNESS_MAX_VALUE = SIGNEDNESS_UNSIGNED,
+        AUTO,
+        SIGNED,
+        UNSIGNED,
+
+        MAX_VALUE = UNSIGNED
     }
 
     public enum Padding
     {
-        PADDING_DISABLED = 0,
-        PADDING_AUTO = -1,
-        PADDING_MAX_VALUE = PADDING_AUTO,
+        DISABLED = 0,
+        AUTO = -1,
+
+        MAX_VALUE = AUTO
     }
 
     public enum FormatterFunction
     {
-        FUNC_PRE_INSTRUCTION,
-        FUNC_POST_INSTRUCTION,
-        FUNC_FORMAT_INSTRUCTION,
-        FUNC_PRE_OPERAND,
-        FUNC_POST_OPERAND,
-        FUNC_FORMAT_OPERAND_REG,
-        FUNC_FORMAT_OPERAND_MEM,
-        FUNC_FORMAT_OPERAND_PTR,
-        FUNC_FORMAT_OPERAND_IMM,
-        FUNC_PRINT_MNEMONIC,
-        FUNC_PRINT_REGISTER,
-        FUNC_PRINT_ADDRESS_ABS,
-        FUNC_PRINT_ADDRESS_REL,
-        FUNC_PRINT_DISP,
-        FUNC_PRINT_IMM,
-        FUNC_PRINT_TYPECAST,
-        FUNC_PRINT_SEGMENT,
-        FUNC_PRINT_DECORATOR,
-        FUNC_MAX_VALUE = FUNC_PRINT_DECORATOR,
+        PRE_INSTRUCTION,
+        POST_INSTRUCTION,
+        FORMAT_INSTRUCTION,
+        PRE_OPERAND,
+        POST_OPERAND,
+        FORMAT_OPERAND_REG,
+        FORMAT_OPERAND_MEM,
+        FORMAT_OPERAND_PTR,
+        FORMAT_OPERAND_IMM,
+        PRINT_MNEMONIC,
+        PRINT_REGISTER,
+        PRINT_ADDRESS_ABS,
+        PRINT_ADDRESS_REL,
+        PRINT_DISP,
+        PRINT_IMM,
+        PRINT_TYPECAST,
+        PRINT_SEGMENT,
+        PRINT_DECORATOR,
+
+        MAX_VALUE = PRINT_DECORATOR
     }
 
     public enum Decorator
     {
-        DECORATOR_INVALID,
-        DECORATOR_MASK,
-        DECORATOR_BC,
-        DECORATOR_RC,
-        DECORATOR_SAE,
-        DECORATOR_SWIZZLE,
-        DECORATOR_CONVERSION,
-        DECORATOR_EH,
-        DECORATOR_MAX_VALUE = DECORATOR_EH,
+        INVALID,
+        MASK,
+        BC,
+        RC,
+        SAE,
+        SWIZZLE,
+        CONVERSION,
+        EH,
+
+        MAX_VALUE = EH
     }
 
     public struct FormatterContext
