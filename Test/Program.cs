@@ -6,7 +6,7 @@ using Decoder = Zyantific.Zydis.Native.Decoder;
 
 namespace Test
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main(string[] args)
         {
@@ -26,7 +26,7 @@ namespace Test
                 throw new Exception("Failed to initialize instruction-formatter.");
             }
 
-            var data = new byte[] { 0xEB, 0x00, 0x90, 0xCC };
+            var data = new byte[] { 0x48, 0x8B, 0x84, 0x8A, 0x34, 0x12, 0x00, 0x00, 0xEB, 0x00, 0x90, 0xCC };
             var buffer = new byte[Constants.MAX_INSTRUCTION_LENGTH];
             var offset = 0;
 

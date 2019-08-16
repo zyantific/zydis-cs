@@ -17,43 +17,40 @@ namespace Zyantific.Zydis.Native
         TZCNT,
         WBNOINVD,
         CLDEMOTE,
-        MAX_VALUE = CLDEMOTE,
+
+        MAX_VALUE = CLDEMOTE
     }
 
     [StructLayout(LayoutKind.Sequential)]
 #if ZYDIS_UNSAFE
-    unsafe public struct Decoder
+    public unsafe struct Decoder
 #else
     public struct Decoder
 #endif
     {
-        private const string ImportNameInit = "ZydisDecoderInit";
-        private const string ImportNameEnableMode = "ZydisDecoderEnableMode";
-        private const string ImportNameDecodeBuffer = "ZydisDecoderDecodeBuffer";
-
         public MachineMode MachineMode;
 
         public AddressWidth AddressWidth;
 
 #if ZYDIS_UNSAFE
-        public fixed byte DecoderMode[(int)Native.DecoderMode.MAX_VALUE];
+        public fixed byte DecoderMode[(int)Native.DecoderMode.MAX_VALUE + 1];
 #else
         [MarshalAs(UnmanagedType.ByValArray,
-            ArraySubType = UnmanagedType.I1, SizeConst = (int)Native.DecoderMode.MAX_VALUE)]
+            ArraySubType = UnmanagedType.I1, SizeConst = (int)Native.DecoderMode.MAX_VALUE + 1)]
         public bool[] DecoderMode;
 #endif
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameInit)]
+            EntryPoint = "ZydisDecoderInit")]
         public static extern ZyanStatus Init(ref Decoder decoder, MachineMode machineMode, AddressWidth addressWidth);
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameEnableMode)]
+            EntryPoint = "ZydisDecoderEnableMode")]
         public static extern ZyanStatus EnableMode(ref Decoder decoder, DecoderMode decoderMode,
             [MarshalAs(UnmanagedType.I1)] bool enabled);
 
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
-            EntryPoint = ImportNameDecodeBuffer)]
+            EntryPoint = "ZydisDecoderDecodeBuffer")]
         public static extern ZyanStatus DecodeBuffer(ref Decoder decoder,
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U1)] ZyanU8[] buffer,
             ZyanUSize length, ref DecodedInstruction instruction);

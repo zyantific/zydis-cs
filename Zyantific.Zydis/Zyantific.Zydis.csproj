@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Zyantific.Zycore\Zyantific.Zycore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Internal\" />
+  </ItemGroup>
+
 </Project>
