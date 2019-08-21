@@ -9,6 +9,8 @@ using ZyanUSize = System.UIntPtr;
 
 namespace Zyantific.Zydis.Native
 {
+    using FormatterTokenConst = FormatterToken;
+
     public enum FormatterStyle
     {
         ATT,
@@ -154,5 +156,21 @@ namespace Zyantific.Zydis.Native
         public static extern ZyanStatus FormatOperandEx(ref Formatter formatter, ref DecodedInstruction instruction,
             ZyanU8 index, [MarshalAs(UnmanagedType.LPStr)] StringBuilder buffer, System.UIntPtr length,
             ZyanU64 runtimeAddress, System.IntPtr userData);
+
+        [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
+            EntryPoint = "ZydisFormatterTokenizeInstruction")]
+        public static extern ZyanStatus TokenizeInstruction(ref Formatter formatter, ref DecodedInstruction instruction,
+            System.IntPtr buffer, ZyanUSize length, ZyanU64 runtimeAddress, [MarshalAs(UnmanagedType.LPStruct)] ref FormatterTokenConst token);
+
+        [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
+            EntryPoint = "ZydisFormatterTokenizeInstructionEx")]
+        public static extern ZyanStatus TokenizeInstructionEx(ref Formatter formatter, ref DecodedInstruction instruction,
+            System.IntPtr buffer, ZyanUSize length, ZyanU64 runtimeAddress, [MarshalAs(UnmanagedType.LPStruct)] ref FormatterTokenConst token,
+            System.IntPtr userData);
+
+        [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
+            EntryPoint = "ZydisFormatterTokenizeOperand")]
+        public static extern ZyanStatus TokenizeOperand(ref Formatter formatter, DecodedInstruction instruction, ZyanU8 index, System.IntPtr buffer,
+            ZyanUSize length, ZyanU64 runtimeAddress, [MarshalAs(UnmanagedType.LPStruct)] ref FormatterTokenConst token);   
     }
 }

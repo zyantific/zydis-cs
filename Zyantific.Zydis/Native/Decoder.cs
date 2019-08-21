@@ -28,12 +28,12 @@ namespace Zyantific.Zydis.Native
     public struct Decoder
 #endif
     {
-        public MachineMode MachineMode;
+        private readonly MachineMode MachineMode;
 
-        public AddressWidth AddressWidth;
+        private readonly AddressWidth AddressWidth;
 
 #if ZYDIS_UNSAFE
-        public fixed byte DecoderMode[(int)Native.DecoderMode.MAX_VALUE + 1];
+        private fixed byte DecoderMode[(int)Native.DecoderMode.MAX_VALUE + 1];
 #else
         [MarshalAs(UnmanagedType.ByValArray,
             ArraySubType = UnmanagedType.I1, SizeConst = (int)Native.DecoderMode.MAX_VALUE + 1)]
