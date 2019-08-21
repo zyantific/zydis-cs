@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.InteropServices;
 
 namespace Zyantific.Zycore.Native
 {
-    struct ZyanAllocator
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct ZyanAllocator
     {
-        IntPtr Allocate;
+        private readonly IntPtr Allocate;
 
-        IntPtr Reallocate;
+        private readonly IntPtr Reallocate;
 
-        IntPtr Deallocate;
+        private readonly IntPtr Deallocate;
     }
 }

@@ -11,10 +11,11 @@ namespace Zyantific.Zydis.Native
         ZYDIS_FEATURE_FORMATTER,
         ZYDIS_FEATURE_AVX512,
         ZYDIS_FEATURE_KNC,
-        ZYDIS_FEATURE_MAX_VALUE = ZYDIS_FEATURE_KNC,
+
+        ZYDIS_FEATURE_MAX_VALUE = ZYDIS_FEATURE_KNC
     }
 
-    public struct Zydis
+    public static class Zydis
     {
         [DllImport(nameof(Zyantific.Zydis), ExactSpelling = true,
             EntryPoint = "ZydisGetVersion")]

@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
-
-using ZyanStringFlags = System.Byte;
 
 namespace Zyantific.Zycore.Native
 {
+    [Flags]
+    public enum ZyanStringFlags : byte
+    {
+        HAS_FIXED_CAPACITY = 0x01
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     public struct ZyanString
     {
-        public ZyanStringFlags Flags;
+        private readonly ZyanStringFlags Flags;
 
-        public ZyanVector Vector;
+        private readonly ZyanVector Vector;
     }
 }
